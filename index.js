@@ -5,6 +5,8 @@ require("dotenv").config();
 
 const clientRoutes = require("./routes/client/index.routes");
 
+app.use(express.static("public"));
+
 app.set("views", "./views");
 app.set("view engine", "pug");
 
