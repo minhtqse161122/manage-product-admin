@@ -13,10 +13,9 @@ module.exports.index = async (req, res) => {
 
     // Add key [newPrice]
     const data_v2 = data.map((item) => {
-      item.newPrice = (
-        item.price -
-        item.price / item.discountPercentage
-      ).toFixed(2);
+      item.newPrice = Math.round(
+        item.price - item.price * (item.discountPercentage * (1 / 100))
+      );
 
       return item;
     });

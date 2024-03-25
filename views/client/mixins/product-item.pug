@@ -5,6 +5,6 @@ mixin product-item(data)
                     img(src=data.thumbnail alt=data.title)
                 .inner-content 
                     h4.inner-titl #{data.title}
-                    .inner-price-new #{data.newPrice}
-                    .inner-price-old #{data.price}
-                    .inner-discount %#{data.discountPercentage}
+                    .inner-price-new $#{data.newPrice}
+                    .inner-price-old $#{data.price}
+                    .inner-discount -#{data.discountPercentage}%
