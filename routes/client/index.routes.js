@@ -9,6 +9,7 @@ const homeRoutes = require("./home.routes");
  * @description Base url: http://localhost:3000/
  * @param {Object} app - Ứng dụng Express.
  */
+
 module.exports = (app) => {
   app.use("/", homeRoutes);
 

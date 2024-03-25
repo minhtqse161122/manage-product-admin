@@ -1,9 +1,11 @@
 const express = require("express");
-const app = express();
+const clientRoutes = require("./routes/client/index.routes");
+const { connectDB } = require("./config/database");
 
 require("dotenv").config();
 
-const clientRoutes = require("./routes/client/index.routes");
+const app = express();
+connectDB(process.env.DB_CONNECTION_STRING);
 
 app.use(express.static("public"));
 
