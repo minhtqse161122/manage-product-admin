@@ -1,0 +1,10 @@
+mixin product-item(data)
+    .col-4.mb-3 
+            .product-item 
+                .inner-image 
+                    img(src=data.thumbnail alt=data.title)
+                .inner-content 
+                    h4.inner-titl #{data.title}
+                    .inner-price-new #{data.newPrice}
+                    .inner-price-old #{data.price}
+                    .inner-discount %#{data.discountPercentage}

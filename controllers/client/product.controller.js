@@ -1,7 +1,32 @@
+const Product = require("../../models/product.model");
+
+/**
+ * [GET]
+ * Lấy ra Products
+ */
 module.exports.index = async (req, res) => {
   try {
+    const data = await Product.find({
+      status: "active",
+      deleted: false,
+    });
+
+    // Add key [newPrice]
+    const data_v2 = data.map((item) => {
+      item.newPrice = (
+        item.price -
+        item.price / item.discountPercentage
+      ).toFixed(2);
+
+      return item;
+    });
+    // End add key [newPrice]
+
     res.render("client/pages/product/index", {
       title: "Products Page",
+      products: data_v2,
     });
-  } catch (error) {}
+  } catch (error) {
+    res.render("client/pages/not-found/index");
+  }
 };
