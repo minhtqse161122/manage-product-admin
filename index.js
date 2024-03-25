@@ -1,8 +1,8 @@
 const express = require("express");
+const { connectDB } = require("./config/database");
+const systemConfig = require("./config/system");
 const clientRoutes = require("./routes/client/index.routes");
 const adminRoutes = require("./routes/admin/index.routes");
-const { connectDB } = require("./config/database");
-
 require("dotenv").config();
 
 const app = express();
@@ -11,6 +11,10 @@ connectDB(process.env.DB_CONNECTION_STRING);
 // Config static file
 app.use(express.static("public"));
 // End config static file
+
+// App.locals
+app.locals.prefixAdmin = systemConfig.prefixAdmin;
+// End app.locals
 
 // Config Template Engines
 app.set("views", "./views");
