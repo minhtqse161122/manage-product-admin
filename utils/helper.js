@@ -1,4 +1,9 @@
-const capitalize = (myString) => {
+/**
+ * Hàm chuyển string thành capitalize
+ * @param {string} myString
+ * @returns {string}
+ */
+module.exports.capitalize = (myString) => {
   const strArr = myString.split("");
 
   const newArr = [];
@@ -16,6 +21,21 @@ const capitalize = (myString) => {
   return newArr.join("");
 };
 
-module.exports = {
-  capitalize,
+/**
+ * Hàm trả về Regex cho việc find text search
+ * @param {string} query
+ * @returns {{textSearch: string, title: RegExp}}
+ */
+module.exports.objectTextSearch = (query) => {
+  let textSearch = "";
+  let title;
+  if (query.keyword) {
+    textSearch = query.keyword;
+    title = new RegExp(query.keyword, "i");
+  }
+
+  return {
+    textSearch,
+    title,
+  };
 };
