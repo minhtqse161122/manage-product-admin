@@ -1,4 +1,6 @@
 extends ../../layout/_default-layout.pug
-
+include ../../mixins/box-head.mixin.pug
 block main  
-    h1 #{title}
+    .row 
+        .col-12
+            +box-head('Trang chủ')
