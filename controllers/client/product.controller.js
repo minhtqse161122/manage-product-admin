@@ -1,8 +1,7 @@
 const Product = require("../../models/product.model");
 
 /**
- * [GET]
- * Lấy ra Products
+ * @method GET - /products
  */
 module.exports.index = async (req, res) => {
   try {
