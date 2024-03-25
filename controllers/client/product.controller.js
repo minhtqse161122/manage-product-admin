@@ -1,5 +1,7 @@
-module.exports.index = (req, res) => {
-  res.render("client/pages/product/index", {
-    title: "Products Page",
-  });
+module.exports.index = async (req, res) => {
+  try {
+    res.render("client/pages/product/index", {
+      title: "Products Page",
+    });
+  } catch (error) {}
 };
