@@ -1,4 +1,5 @@
 extends ../../layout/_default-layout.pug
+include ../../mixins/product-component.mixin.pug
 
 block main 
     h1=title
@@ -13,20 +14,9 @@ block main
                 th Status 
                 th Action
         tbody 
-            tr 
-                td 1
-                td 
-                    img(
-                        src="https://cdn.dummyjson.com/product-images/1/thumbnail.jpg"
-                        alt="San pham 1"
-                        width="100px"
-                        height="auto"
-                    )
-                td San Pham 1
-                td 100$
-                td
-                    a(href="#") Active 
-                td 
-                    button(class="btn btn-warning btn-sm") Edit
-                    button(class="btn btn-danger btn-sm") Delete
+
+            each item,index in products
+                tr 
+                    +product-component(item, index)
+                
                     
