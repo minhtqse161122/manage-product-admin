@@ -4,19 +4,34 @@ include ../../mixins/product-component.mixin.pug
 block main 
     h1=title
 
-    table.table.table-hover.table-sm 
-        thead 
-            tr 
-                th STT
-                th Image
-                th Title
-                th Price
-                th Status 
-                th Action
-        tbody 
+    .card.mb-3 
+        .card-header Filter and Search
+        .card-body.d-flex.gap-2
+            .btn-group
+                button.btn.btn-success.dropdown-toggle(type='button' id="filter-btn" data-bs-toggle='dropdown' aria-expanded='false') Filter by: #{currentStatus}
+                ul.dropdown-menu
+                    li
+                        button(class="dropdown-item" active-status="all") All
+                    li
+                        button(class="dropdown-item" active-status="active") Active
+                    li
+                        button(class="dropdown-item" active-status="inactive") Inactive
 
-            each item,index in products
+            .btn.btn-warning(id="btn-clear-filter") Clear
+        table.table.table-hover.table-sm 
+            thead 
                 tr 
-                    +product-component(item, index)
+                    th STT
+                    th Image
+                    th Title
+                    th Price
+                    th Status 
+                    th Action
+            tbody 
+
+                each item,index in products
+                    tr 
+                        +product-component(item, index)
+    
                 
                     
