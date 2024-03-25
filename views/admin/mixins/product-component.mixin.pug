@@ -13,7 +13,7 @@ mixin product-component(data, index)
         if(data.status == 'active') 
             a(href="#") Active 
         else 
-            a(href="#") Inactive 
+            a(href="#" class="text-danger") Inactive 
     td
         button(class="btn btn-warning btn-sm") Edit
         button(class="btn btn-danger btn-sm") Delete
