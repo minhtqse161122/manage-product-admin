@@ -53,10 +53,11 @@ module.exports.index = async (req, res) => {
 
 /**
  * Thay đổi trạng thái của sản phẩm
- * @method GET - /admin/products/change-status/:status/:productId
+ * @method PATCH - /admin/products/change-status/:status/:productId
  */
 module.exports.changeStatus = async (req, res) => {
   try {
+    console.log(req.method);
     const status = req.params.status;
     const productId = req.params.productId;
 

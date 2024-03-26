@@ -12,7 +12,7 @@ if (changeStatusButton.length > 0) {
       const afterChangeStatus =
         currentStatus === "active" ? "inactive" : "active";
 
-      const newAction = `${path}/${afterChangeStatus}/${currentId}`;
+      const newAction = `${path}/${afterChangeStatus}/${currentId}?_method=PATCH`;
 
       // set up for submit form
       formChangeStatus.setAttribute("action", newAction);
