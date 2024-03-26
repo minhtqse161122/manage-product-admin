@@ -17,8 +17,10 @@ if (myFiterBtn) {
         const valueStatus = btn.getAttribute("active-status");
         if (valueStatus) {
           url.searchParams.set("status", valueStatus);
+          url.searchParams.set("page", 1);
         } else {
           url.searchParams.delete("status");
+          url.searchParams.delete("page");
         }
         // Điều hướng web sang một url mới
         window.location.href = url;
