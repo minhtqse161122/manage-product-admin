@@ -5,10 +5,14 @@ const $$ = document.querySelectorAll.bind(document);
 const myFiterBtn = $("#filter-btn");
 const listStatus = $$("[active-status]");
 
+let currentURL = () => {
+  return new URL(window.location.href);
+};
+
 if (myFiterBtn) {
   if (listStatus.length > 0) {
     listStatus.forEach((btn) => {
-      let url = new URL(window.location.href);
+      let url = currentURL();
       btn.addEventListener("click", () => {
         const valueStatus = btn.getAttribute("active-status");
         if (valueStatus) {
@@ -29,7 +33,7 @@ const clearFilterBtn = $("#btn-clear-filter");
 
 if (clearFilterBtn) {
   clearFilterBtn.addEventListener("click", () => {
-    let url = new URL(window.location.href);
+    let url = currentURL();
     if (url.href.includes("?")) {
       const filterUrl = url.href.split("?");
       window.location.href = filterUrl[0];
@@ -46,7 +50,7 @@ if (formSearch) {
     e.preventDefault();
     const valueTextSearch = e.target.elements["keyword"].value;
     if (valueTextSearch.trim()) {
-      let url = new URL(window.location.href);
+      let url = currentURL();
       url.searchParams.set("keyword", valueTextSearch);
       window.location.href = url;
     } else {
@@ -55,3 +59,46 @@ if (formSearch) {
   });
 }
 // End find by text search
+
+//Pagination
+const pagesBtn = $$("[data-page]");
+
+if (pagesBtn) {
+  pagesBtn.forEach((btn) => {
+    btn.addEventListener("click", (e) => {
+      let url = currentURL();
+      const currentPage = btn.getAttribute("data-page");
+      if (currentPage) {
+        url.searchParams.set("page", currentPage);
+        window.location.href = url;
+      }
+    });
+  });
+}
+//End Pagination
+
+// Handle next , prev pagination
+const paginateBtn = $$("[btn-pagination]");
+if (paginateBtn) {
+  paginateBtn.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      let url = currentURL();
+      const currentPage = parseInt(btn.getAttribute("currentPage"));
+      const totalPage = parseInt(btn.getAttribute("totalPage"));
+      const valueForPaginate = btn.getAttribute("btn-pagination");
+      if (valueForPaginate !== "next") {
+        if (currentPage > 1) {
+          url.searchParams.set("page", currentPage - 1);
+          window.location.href = url;
+        }
+      } else {
+        if (currentPage < totalPage) {
+          url.searchParams.set("page", currentPage + 1);
+          window.location.href = url;
+        }
+      }
+    });
+  });
+}
+
+// End handle next , prev pagination
