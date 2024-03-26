@@ -36,10 +36,23 @@ block main
             if (products.length > 0)
                 each item,index in products
                     tr 
-                        +product-component(item, index)
+                        +product-component(item,skipIndex+index)
             else
                 tr
                     p No data founded
+
+    nav
+        ul.pagination
+            li(class="page-item")
+                button(class="page-link" btn-pagination="prev" currentPage=currentPage) Previous
+
+            - for (let i = 0; i < totalPage; i++)
+                - const isActive = (currentPage - 1) == i ? 'active' : '' 
+                li(class=`page-item ${isActive}` data-page=i+1)
+                    button(class="page-link") #{i+1}
+
+            li(class="page-item")
+                button(class="page-link" btn-pagination="next" currentPage=currentPage totalPage=totalPage) Next
                           
     
                 
