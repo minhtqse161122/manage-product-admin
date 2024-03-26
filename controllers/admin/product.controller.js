@@ -3,9 +3,9 @@ const { objectTextSearch, capitalize } = require("../../utils/search-helper");
 const { pagination } = require("../../utils/pagination-helper");
 
 /**
+ * Lấy ra list sản phẩm và filter
  * @method GET - /admin/products
  */
-
 module.exports.index = async (req, res) => {
   try {
     let currentStatus;
@@ -49,4 +49,23 @@ module.exports.index = async (req, res) => {
   } catch (error) {
     res.render("./admin/pages/not-found/index");
   }
+};
+
+/**
+ * Thay đổi trạng thái của sản phẩm
+ * @method GET - /admin/products/change-status/:status/:productId
+ */
+module.exports.changeStatus = async (req, res) => {
+  try {
+    const status = req.params.status;
+    const productId = req.params.productId;
+
+    const response = await Product.updateOne(
+      { _id: productId },
+      { status: status }
+    );
+    if (response.acknowledged === true) {
+      res.redirect("back");
+    }
+  } catch (error) {}
 };
