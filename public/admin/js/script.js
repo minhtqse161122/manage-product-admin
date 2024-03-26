@@ -26,6 +26,7 @@ if (myFiterBtn) {
 
 // Clear Filter
 const clearFilterBtn = $("#btn-clear-filter");
+
 if (clearFilterBtn) {
   clearFilterBtn.addEventListener("click", () => {
     let url = new URL(window.location.href);

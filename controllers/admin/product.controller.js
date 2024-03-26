@@ -1,6 +1,5 @@
 const Product = require("../../models/product.model");
-const { capitalize } = require("../../utils/helper");
-const { objectTextSearch } = require("../../utils/helper");
+const { objectTextSearch, capitalize } = require("../../utils/search-helper");
 const { objectStatusFilter } = require("../../utils/helper");
 
 /**
@@ -26,7 +25,9 @@ module.exports.index = async (req, res) => {
       queryString.title = objectSearch.title;
     }
 
+    // query data from Database
     const data = await Product.find(queryString);
+
     res.render("./admin/pages/product/index", {
       title: "List Products",
       products: data,
