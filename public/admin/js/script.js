@@ -100,5 +100,4 @@ if (paginateBtn) {
     });
   });
 }
-
 // End handle next , prev pagination

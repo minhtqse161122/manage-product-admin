@@ -11,9 +11,19 @@ mixin product-component(data, index)
     td #{data.price}
     td
         if(data.status == 'active') 
-            a(href="#") Active 
+            a(
+                href='javascript:;' 
+                btn-change-status 
+                data-status=data.status
+                data-id=data.id
+                class="") Active 
         else 
-            a(href="#" class="text-danger") Inactive 
+            a(
+                href='javascript:;' 
+                btn-change-status 
+                data-status="inactive" 
+                data-id=data.id
+                class="text-danger") Inactive                              
     td
-        button(class="btn btn-warning btn-sm") Edit
-        button(class="btn btn-danger btn-sm") Delete
+        button(class="btn btn-warning btn-sm") Edit                      
+        button(class="btn btn-danger btn-sm") Delete 
