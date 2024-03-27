@@ -14,10 +14,8 @@ if (changeStatusButton.length > 0) {
 
       const newAction = `${path}/${afterChangeStatus}/${currentId}?_method=PATCH`;
       // set up for submit form
-      // formChangeStatus.setAttribute("action", newAction);
-      // formChangeStatus.submit();
-      window.location.href =
-        "http://localhost:3000/admin/products/change-status/unactive/123";
+      formChangeStatus.setAttribute("action", newAction);
+      formChangeStatus.submit();
     });
   });
 }
