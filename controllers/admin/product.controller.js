@@ -53,12 +53,12 @@ module.exports.index = async (req, res) => {
 
 /**
  * Thay đổi trạng thái của sản phẩm
- * @method PATCH - /admin/products/change-status/:status/:productId
+ * @method GET - /admin/products/change-status/:status/:productId
  */
 module.exports.changeStatus = async (req, res) => {
   try {
-    // const status = req.params.status;
-    // const productId = req.params.productId;
+    const status = req.params.status;
+    const productId = req.params.productId;
 
     // const response = await Product.updateOne(
     //   { _id: productId },
