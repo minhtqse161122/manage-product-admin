@@ -23,24 +23,26 @@ block main
                 +form-search(textSearch)
                 
     .card.mb-3 
-        .card-header.align-items-center.d-flex.justify-content-between
-            div Filter and Search
+        .card-header Filter and Search
         .card-body
-            form(
-                action=`${prefixAdmin}/products/change-multiple-status`
+            form( 
+                action=`${prefixAdmin}/products/change-multiple-status?_method=PATCH`
                 id="form-change-multiple-status"
+                method="POST"
+               
             )
                 .d-flex.align-items-center 
                     .form-group 
-                        select(name='type' class="form-control")
+                        select(name='type' class="form-control" id="select-status")
                             option(value="active") Active
                             option(value="inactive") Inactive
                     .form-group 
                         input(
+                            id="list-id-product"
                             type="text"
                             name="ids"
                             value=""
-                            class="form-control"
+                            class="form-control d-none"
                         )
                     button(type="submit" class="btn btn-primary") Apply
 
@@ -48,7 +50,10 @@ block main
                 thead 
                     tr 
                         th 
-                            input(type="checkbox", name="")
+                            input(
+                                type="checkbox"
+                                id="checkbox-all"
+                                )
                         th STT
                         th Image
                         th Title

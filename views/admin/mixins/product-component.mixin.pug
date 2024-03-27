@@ -2,9 +2,10 @@ mixin product-component(data, index)
     td 
         input(
             type="checkbox"
-            checkbox-change-status
+            checkbox-product
             data-status=data.status
             data-id=data.id
+            data-name=data.title
             name=""
             )
     td #{index+1}
@@ -22,7 +23,7 @@ mixin product-component(data, index)
             a(
                 href='javascript:;' 
                 btn-change-status 
-                data-status=data.status
+                data-status="active"
                 data-id=data.id
                 class="") Active 
         else 
