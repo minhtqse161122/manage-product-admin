@@ -9,6 +9,6 @@ router.patch(
   productController.changeStatus
 );
 
-// router.patch("/change-mutiple-status/:status/:listProductId");
+router.patch("/change-multiple-status", productController.changeMultiStatus);
 
 module.exports = router;
