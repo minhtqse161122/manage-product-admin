@@ -21,25 +21,49 @@ block main
                 .btn.btn-warning(id="btn-clear-filter") Clear
             .col-4
                 +form-search(textSearch)
+                
+    .card.mb-3 
+        .card-header.align-items-center.d-flex.justify-content-between
+            div Filter and Search
+        .card-body
+            //- form(
+            //-     action=`${prefixAdmin}/products/change-multiple-status`
+            //-     id="form-change-multiple-status"
+            //- )
+            //-     .d-flex.align-items-center 
+            //-         .form-group 
+            //-             select(name='type' class="form-control")
+            //-                 option(value="active") Active
+            //-                 option(value="inactive") Inactive
+            //-         .form-group 
+            //-             input(
+            //-                 type="text"
+            //-                 name="ids"
+            //-                 value=""
+            //-                 class="form-control"
+            //-             )
+            //-         button(type="submit" class="btn btn-primary") Apply
 
-        table.table.table-hover.table-sm 
-            thead 
-                tr 
-                    th STT
-                    th Image
-                    th Title
-                    th Price
-                    th Status 
-                    th Action
-            tbody 
-
-            if (products.length > 0)
-                each item,index in products
+            table.table.table-hover.table-sm 
+                thead 
                     tr 
-                        +product-component(item,skipIndex+index)
-            else
-                tr
-                    p No data founded
+                        th 
+                            input(type="checkbox", name="")
+                        th STT
+                        th Image
+                        th Title
+                        th Price
+                        th Status 
+                        th Action
+                tbody 
+
+                if (products.length > 0)
+                    each item,index in products
+                        tr 
+                            +product-component(item,skipIndex+index)
+                else
+                    tr
+                        p No data founded
 
     nav
         ul.pagination
@@ -58,7 +82,7 @@ block main
                 
     form(
         action=""
-        method="POST"
+        method="GET"
         id="form-change-status"
         data-path=`${prefixAdmin}/products/change-status`
     )
