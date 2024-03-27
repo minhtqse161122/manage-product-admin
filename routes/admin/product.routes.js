@@ -4,7 +4,10 @@ const productController = require("../../controllers/admin/product.controller");
 
 router.get("/", productController.index);
 
-router.get("/change-status/:status/:productId", productController.changeStatus);
+router.patch(
+  "/change-status/:status/:productId",
+  productController.changeStatus
+);
 
 // router.patch("/change-mutiple-status/:status/:listProductId");
 

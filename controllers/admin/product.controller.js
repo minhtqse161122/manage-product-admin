@@ -60,25 +60,14 @@ module.exports.changeStatus = async (req, res) => {
     const status = req.params.status;
     const productId = req.params.productId;
 
-    // const response = await Product.updateOne(
-    //   { _id: productId },
-    //   { status: status }
-    // );
-    // if (response.acknowledged === true) {
-    //   res.redirect("back");
-    // }
-    res.send(`${req.params.status} ${req.params.productId}`);
+    const response = await Product.updateOne(
+      { _id: productId },
+      { status: status }
+    );
+    if (response.acknowledged === true) {
+      res.redirect("back");
+    }
   } catch (error) {
     console.log(error);
   }
-};
-
-/**
- * Thay đổi trạng thái của nhiều sản phẩm
- * @method PATCH - /admin/products/change-mutiple-status/:status/:listProductId
- */
-module.exports.changeStatus = async (req, res) => {
-  try {
-    const status = req.params.status;
-  } catch (error) {}
 };

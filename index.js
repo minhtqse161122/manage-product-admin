@@ -3,10 +3,12 @@ const { connectDB } = require("./config/database");
 const systemConfig = require("./config/system");
 const clientRoutes = require("./routes/client/index.routes");
 const adminRoutes = require("./routes/admin/index.routes");
+const methodOverride = require("method-override");
 require("dotenv").config();
 
 const app = express();
 connectDB(process.env.DB_CONNECTION_STRING);
+app.use(methodOverride("_method"));
 
 // Config static file
 app.use(express.static("public"));

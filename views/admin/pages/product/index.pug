@@ -26,23 +26,23 @@ block main
         .card-header.align-items-center.d-flex.justify-content-between
             div Filter and Search
         .card-body
-            //- form(
-            //-     action=`${prefixAdmin}/products/change-multiple-status`
-            //-     id="form-change-multiple-status"
-            //- )
-            //-     .d-flex.align-items-center 
-            //-         .form-group 
-            //-             select(name='type' class="form-control")
-            //-                 option(value="active") Active
-            //-                 option(value="inactive") Inactive
-            //-         .form-group 
-            //-             input(
-            //-                 type="text"
-            //-                 name="ids"
-            //-                 value=""
-            //-                 class="form-control"
-            //-             )
-            //-         button(type="submit" class="btn btn-primary") Apply
+            form(
+                action=`${prefixAdmin}/products/change-multiple-status`
+                id="form-change-multiple-status"
+            )
+                .d-flex.align-items-center 
+                    .form-group 
+                        select(name='type' class="form-control")
+                            option(value="active") Active
+                            option(value="inactive") Inactive
+                    .form-group 
+                        input(
+                            type="text"
+                            name="ids"
+                            value=""
+                            class="form-control"
+                        )
+                    button(type="submit" class="btn btn-primary") Apply
 
             table.table.table-hover.table-sm 
                 thead 
@@ -82,7 +82,7 @@ block main
                 
     form(
         action=""
-        method="GET"
+        method="POST"
         id="form-change-status"
         data-path=`${prefixAdmin}/products/change-status`
     )
