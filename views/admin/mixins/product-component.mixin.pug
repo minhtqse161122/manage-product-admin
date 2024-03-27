@@ -1,4 +1,12 @@
 mixin product-component(data, index)
+    td 
+        input(
+            type="checkbox"
+            checkbox-change-status
+            data-status=data.status
+            data-id=data.id
+            name=""
+            )
     td #{index+1}
     td 
         img(
@@ -23,7 +31,7 @@ mixin product-component(data, index)
                 btn-change-status 
                 data-status="inactive" 
                 data-id=data.id
-                class="text-danger") Inactive                              
+                class="text-danger") Inactive                                
     td
         button(class="btn btn-warning btn-sm") Edit                      
         button(class="btn btn-danger btn-sm") Delete 
