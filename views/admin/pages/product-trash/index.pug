@@ -1,0 +1,46 @@
+extends ../../layout/_default-layout.pug
+include ../../mixins/trash-product-component.mixin.pug
+
+block main 
+    h1=title
+
+    .card.mb-3 
+        .card-header List Trash Of Product
+        .card-body
+            table.table.table-hover.table-sm 
+                thead 
+                    tr 
+                        th 
+                            input(
+                                type="checkbox"
+                                id="checkbox-all"
+                                )
+                        th STT
+                        th Image
+                        th Title
+                        th Price
+                        th Action
+                tbody 
+
+                if (products.length > 0)
+                    each item,index in products
+                        tr 
+                                +trash-product-component(item,index)
+                else
+                    tr
+                        p No data founded
+
+   
+    form(
+        id="form-recovery-product"
+        action=""
+        method="POST"
+        data-path=`${prefixAdmin}/product-trash/recovery-product`
+    ) 
+
+    form(
+        id="form-delete-permanently-product"
+        action=""
+        method="POST"
+        data-path=`${prefixAdmin}/product-trash/delete-permanently-product`
+    ) 
