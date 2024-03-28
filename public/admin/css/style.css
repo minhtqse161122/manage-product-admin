@@ -1,6 +1,6 @@
 /* Header */
 .header {
-  background: #202020;
+  background: #0b5ed7;
   padding: 10px 0;
   position: sticky;
   top: 0;
@@ -10,6 +10,7 @@
 .header .inner-logo a {
   font-size: 24px;
   font-weight: 700;
+  color: #fff;
 }
 /* End Header */
 
