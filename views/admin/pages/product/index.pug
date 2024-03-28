@@ -1,7 +1,7 @@
 extends ../../layout/_default-layout.pug
 include ../../mixins/product-component.mixin.pug
 include ../../mixins/form-search.mixin.pug
-
+include ../../mixins/form-change-multi.mixin.pug
 block main 
     h1=title
 
@@ -25,25 +25,7 @@ block main
     .card.mb-3 
         .card-header Filter and Search
         .card-body
-            form( 
-                action=`${prefixAdmin}/products/change-multiple-status?_method=PATCH`
-                id="form-change-multiple-status"
-                method="POST"
-            )
-                .d-flex.align-items-center 
-                    .form-group 
-                        select(name='type' class="form-control" id="select-status")
-                            option(value="active") Active
-                            option(value="inactive") Inactive
-                    .form-group 
-                        input(
-                            id="list-id-product"
-                            type="text"
-                            name="ids"
-                            value=""
-                            class="form-control d-none"
-                        )
-                    button(type="submit" class="btn btn-primary") Apply
+            +form-change-multi(`${prefixAdmin}/products/change-multiple-status?_method=PATCH`)
 
             table.table.table-hover.table-sm 
                 thead 
