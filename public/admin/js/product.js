@@ -98,3 +98,22 @@ if (formChangeMultilpleStatus) {
 }
 
 // End handle change multiple status
+
+// Handle delete product
+const deleteButtons = $$("[delete-button]");
+
+if (deleteButtons.length > 0) {
+  const formDeleteProduct = $("#form-delete-product");
+  const path = formDeleteProduct.getAttribute("data-path");
+  deleteButtons.forEach((btn) => {
+    btn.addEventListener("click", (event) => {
+      const isConfirm = confirm("Are you sure to delete");
+      if (isConfirm) {
+        const productId = btn.getAttribute("data-id");
+        formDeleteProduct.action = `${path}/${productId}?_method=DELETE`;
+        formDeleteProduct.submit();
+      }
+    });
+  });
+}
+// End handle delete item

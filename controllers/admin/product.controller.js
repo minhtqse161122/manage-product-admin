@@ -109,3 +109,15 @@ module.exports.changeMultiStatus = async (req, res) => {
     res.redirect("back");
   } catch (error) {}
 };
+
+/**
+ * Xoá mềm - Thay đổi deleted = true
+ * @method DELETE - /admin/products/delete-product/:productId
+ */
+module.exports.deleteProduct = async (req, res) => {
+  try {
+    const productId = req.params.productId;
+    await Product.updateOne({ _id: productId }, { deleted: true });
+    res.redirect("back");
+  } catch (error) {}
+};

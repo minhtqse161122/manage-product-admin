@@ -35,4 +35,8 @@ mixin product-component(data, index)
                 class="text-danger") Inactive                                
     td
         button(class="btn btn-warning btn-sm") Edit                      
-        button(class="btn btn-danger btn-sm") Delete 
+        button(
+            delete-button
+            class="btn btn-danger btn-sm"
+            data-id=data.id
+            ) Delete 

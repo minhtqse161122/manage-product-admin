@@ -11,4 +11,6 @@ router.patch(
 
 router.patch("/change-multiple-status", productController.changeMultiStatus);
 
+router.delete("/delete-product/:productId", productController.deleteProduct);
+
 module.exports = router;
