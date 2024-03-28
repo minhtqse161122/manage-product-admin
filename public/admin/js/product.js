@@ -19,80 +19,69 @@ if (changeStatusButton.length > 0) {
     });
   });
 }
-// End handle change status product
+// End handle change status
 
 // Handle change multiple status
-let listIdProduct = [];
-const checkboxAllProduct = $("#checkbox-all");
-const formChangeMultipleStatus = $("#form-change-multiple-status");
-const listProductIdText = $("#list-id-product");
-const selectStatus = $("#select-status");
-const listCheckboxProduct = $$("[checkbox-product]");
 
-// push all item & pop all item
-if (checkboxAllProduct) {
-  checkboxAllProduct.addEventListener("change", (event) => {
-    if (listCheckboxProduct) {
-      if (event.target.checked) {
-        listCheckboxProduct.forEach((cb) => {
-          cb.setAttribute("checked", true);
-          listIdProduct.push(cb.getAttribute("data-id"));
-        });
-        listProductIdText.setAttribute("value", listIdProduct.join(","));
-      } else {
-        listCheckboxProduct.forEach((cb) => {
-          cb.removeAttribute("checked");
-          listIdProduct = [];
-        });
-        listProductIdText.setAttribute("value", listIdProduct.join(","));
-      }
-    }
-  });
-}
+let listProductId = [];
+const checkboxAllButton = $("#checkbox-all");
+const listCheckBox = $$("[checkbox-product]");
 
-//End push all item & pop all item
-
-const handleAddItemToArray = (arr, item, checked) => {
-  if (!checked) {
-    return arr.filter((p) => p !== item);
-  } else {
-    arr.push(item);
+const handlePushToArray = (arr, productId) => {
+  const indexOfProductId = arr.findIndex((id) => id === productId);
+  if (indexOfProductId === -1) {
+    arr.push(productId);
   }
   return arr;
 };
 
-const handleCheckAllOrNot = (arr, arr2) => {
-  return arr.length === arr2.length;
+if (checkboxAllButton) {
+  checkboxAllButton.addEventListener("change", (event) => {
+    if (event.target.checked) {
+      listCheckBox.forEach((cb) => {
+        cb.checked = true;
+        const productId = cb.getAttribute("data-id");
+        listProductId = handlePushToArray(listProductId, productId);
+      });
+    } else {
+      listCheckBox.forEach((cb) => {
+        cb.checked = false;
+        const productId = cb.getAttribute("data-id");
+        listProductId = listProductId.filter((id) => productId !== id);
+      });
+    }
+    console.log(listProductId);
+  });
+}
+
+const checkAll = (arr) => {
+  let isCheckAllCb = true;
+  arr.forEach((item) => {
+    if (item.checked === false) {
+      isCheckAllCb = false;
+    }
+  });
+  return isCheckAllCb;
 };
 
-// push each item
-if (listCheckboxProduct) {
-  listCheckboxProduct.forEach((cb) => {
-    cb.addEventListener("change", (event) => {
-      const idProduct = event.target.getAttribute("data-id");
-      listIdProduct = handleAddItemToArray(
-        listIdProduct,
-        idProduct,
-        event.target.checked
-      );
-      if (handleCheckAllOrNot(listCheckboxProduct, listIdProduct)) {
-        checkboxAllProduct.setAttribute("checked", true);
-      } else {
-        checkboxAllProduct.removeAttribute("checked");
-      }
-    });
-  });
-}
-// end push each item
-
-// Submit form
-if (formChangeMultipleStatus) {
-  formChangeMultipleStatus.addEventListener("submit", (event) => {
-    const selectedValue =
-      selectStatus.options[selectStatus.selectedIndex].value;
-    const listId = event.target.elements[1].value;
+if (listCheckBox.length > 0) {
+  listCheckBox.forEach((cb) => {
+    const productId = cb.getAttribute("data-id");
+    cb.addEventListener(
+      "change",
+      (event) => {
+        if (event.target.checked) {
+          checkboxAllButton.checked = checkAll(listCheckBox);
+          listProductId = handlePushToArray(listProductId, productId);
+        } else {
+          checkboxAllButton.checked = checkAll(listCheckBox);
+          listProductId = listProductId.filter((id) => productId !== id);
+        }
+        console.log(listProductId);
+      },
+      []
+    );
   });
 }
 
-// End submit form
 // End handle change multiple status
