@@ -24,7 +24,9 @@ if (changeStatusButton.length > 0) {
 // Handle change multiple status
 
 let listProductId = [];
+const listId = $("#list-id");
 const checkboxAllButton = $("#checkbox-all");
+const formChangeMultilpleStatus = $("#form-change-multiple-status");
 const listCheckBox = $$("[checkbox-product]");
 
 const handlePushToArray = (arr, productId) => {
@@ -33,6 +35,16 @@ const handlePushToArray = (arr, productId) => {
     arr.push(productId);
   }
   return arr;
+};
+
+const checkAll = (arr) => {
+  let isCheckAllCb = true;
+  arr.forEach((item) => {
+    if (item.checked === false) {
+      isCheckAllCb = false;
+    }
+  });
+  return isCheckAllCb;
 };
 
 if (checkboxAllButton) {
@@ -54,16 +66,6 @@ if (checkboxAllButton) {
   });
 }
 
-const checkAll = (arr) => {
-  let isCheckAllCb = true;
-  arr.forEach((item) => {
-    if (item.checked === false) {
-      isCheckAllCb = false;
-    }
-  });
-  return isCheckAllCb;
-};
-
 if (listCheckBox.length > 0) {
   listCheckBox.forEach((cb) => {
     const productId = cb.getAttribute("data-id");
@@ -77,10 +79,21 @@ if (listCheckBox.length > 0) {
           checkboxAllButton.checked = checkAll(listCheckBox);
           listProductId = listProductId.filter((id) => productId !== id);
         }
-        console.log(listProductId);
       },
       []
     );
+  });
+}
+
+if (formChangeMultilpleStatus) {
+  formChangeMultilpleStatus.addEventListener("submit", (event) => {
+    event.preventDefault();
+    if (listProductId.length === 0) {
+      alert("Please choose at least 1 product");
+    } else {
+      event.target.elements[1].setAttribute("value", listProductId.join(","));
+      formChangeMultilpleStatus.submit();
+    }
   });
 }
 

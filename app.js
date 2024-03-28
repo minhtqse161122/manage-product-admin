@@ -15,9 +15,6 @@ app.use(methodOverride("_method"));
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }));
 
-// parse application/json
-app.use(bodyParser.json());
-
 // Config static file
 app.use(express.static("public"));
 // End config static file
