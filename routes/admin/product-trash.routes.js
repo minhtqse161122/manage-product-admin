@@ -15,4 +15,9 @@ router.delete(
   productTrashController.permanentlyDeletedProduct
 );
 
+router.patch(
+  "/recovery-all-product",
+  productTrashController.recoveryAllProduct
+);
+
 module.exports = router;

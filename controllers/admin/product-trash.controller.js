@@ -40,6 +40,21 @@ module.exports.recoveryProduct = async (req, res) => {
   }
 };
 
+module.exports.recoveryAllProduct = async (req, res) => {
+  try {
+    const ids = req.body.list_ids.split(",");
+    await Product.updateMany(
+      {
+        _id: { $in: ids },
+      },
+      {
+        deleted: false,
+      }
+    );
+    res.redirect("back");
+  } catch (error) {}
+};
+
 /**
  * Xoá hẳn sản phẩm
  * @method DELETE
