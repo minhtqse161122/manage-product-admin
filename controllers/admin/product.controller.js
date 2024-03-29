@@ -66,9 +66,9 @@ module.exports.changeStatus = async (req, res) => {
       { _id: productId },
       { status: status }
     );
-    if (response.acknowledged === true) {
-      res.redirect("back");
-    }
+
+    req.flash("success", "Change status was successfull !");
+    res.redirect("back");
   } catch (error) {
     console.log(error);
   }
