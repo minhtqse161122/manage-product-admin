@@ -1,9 +1,10 @@
 extends ../../layout/_default-layout.pug
 include ../../mixins/trash-product-component.mixin.pug
+include ../../mixins/notification-component.mixin.pug
 
 block main 
     h1=title
-
+    +alert-component(messages.success)
     .card.mb-3 
         .card-header List Trash Of Product
         .card-body

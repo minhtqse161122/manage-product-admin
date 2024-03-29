@@ -34,6 +34,7 @@ module.exports.recoveryProduct = async (req, res) => {
         deleted: false,
       }
     );
+    req.flash("success", "Product have been recovered");
     res.redirect("back");
   } catch (error) {
     console.log(error);
@@ -55,6 +56,7 @@ module.exports.recoveryAllProduct = async (req, res) => {
         deleted: false,
       }
     );
+    req.flash("success", "All product have been recovered");
     res.redirect("back");
   } catch (error) {}
 };

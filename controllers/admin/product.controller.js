@@ -67,7 +67,7 @@ module.exports.changeStatus = async (req, res) => {
       { status: status }
     );
 
-    req.flash("success", "Change status was successfull !");
+    req.flash("success", "Product status have been changed.");
     res.redirect("back");
   } catch (error) {
     console.log(error);
@@ -128,8 +128,10 @@ module.exports.changeMultiStatus = async (req, res) => {
         }
         break;
       default:
+        m;
         break;
     }
+    req.flash("success", "Product position have been saved.");
     res.redirect("back");
   } catch (error) {}
 };
@@ -148,6 +150,7 @@ module.exports.deleteProduct = async (req, res) => {
         deletedAt: new Date(),
       }
     );
+    req.flash("success", "Product have been deleted.");
     res.redirect("back");
   } catch (error) {}
 };

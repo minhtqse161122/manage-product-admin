@@ -52,7 +52,7 @@
 /* Alert hidden */
 [show-alert] {
   position: fixed;
-  top: 70px;
+  top: 20px;
   right: 15px;
   z-index: 99999;
 }
