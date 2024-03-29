@@ -17,6 +17,14 @@ mixin product-component(data, index)
             )
     td #{data.title}
     td #{data.price}
+    td 
+        input(
+            type="number"
+            value=data.position
+            style="width: 60px"
+            min="1"
+            name="position"
+        )
     td
         if(data.status == 'active') 
             a(

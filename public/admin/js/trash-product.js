@@ -35,5 +35,30 @@ if (permanentlyButtons.length > 0) {
     });
   });
 }
-
 // End delete permanently
+
+//Handle recovery all product
+const formRecoveryAllProduct = $("#form-recovery-all-product");
+
+if (formRecoveryAllProduct) {
+  formRecoveryAllProduct.addEventListener("submit", (event) => {
+    const inputIds = $("input[name='list_ids']");
+    event.preventDefault();
+
+    let idProducts = [];
+    listCheckBox.forEach((cb) => {
+      const productId = cb.getAttribute("data-id");
+      if (cb.checked) {
+        idProducts.push(productId);
+      }
+    });
+    if (idProducts.length === 0) {
+      alert("Please choose at least 1 product");
+    } else {
+      inputIds.value = idProducts.join(",");
+      formRecoveryAllProduct.submit();
+    }
+  });
+}
+
+//End handle recovery all product

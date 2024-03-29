@@ -111,10 +111,20 @@ module.exports.changeMultiStatus = async (req, res) => {
           },
           {
             deleted: true,
+            deletedAt: new Date(),
           }
         );
         break;
 
+      case "change-position":
+        for (const item of ids) {
+          const [productId, positionIndex] = item.split("-");
+          await Product.updateOne(
+            { _id: productId },
+            { position: positionIndex }
+          );
+        }
+        break;
       default:
         break;
     }

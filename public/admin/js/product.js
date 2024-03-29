@@ -23,7 +23,6 @@ if (changeStatusButton.length > 0) {
 
 // Handle change multiple status
 
-let listProductId = [];
 const listId = $("#list-id");
 const checkboxAllButton = $("#checkbox-all");
 const formChangeMultilpleStatus = $("#form-change-multiple-status");
@@ -52,14 +51,10 @@ if (checkboxAllButton) {
     if (event.target.checked) {
       listCheckBox.forEach((cb) => {
         cb.checked = true;
-        const productId = cb.getAttribute("data-id");
-        listProductId = handlePushToArray(listProductId, productId);
       });
     } else {
       listCheckBox.forEach((cb) => {
         cb.checked = false;
-        const productId = cb.getAttribute("data-id");
-        listProductId = listProductId.filter((id) => productId !== id);
       });
     }
   });
@@ -73,10 +68,8 @@ if (listCheckBox.length > 0) {
       (event) => {
         if (event.target.checked) {
           checkboxAllButton.checked = checkAll(listCheckBox);
-          listProductId = handlePushToArray(listProductId, productId);
         } else {
           checkboxAllButton.checked = checkAll(listCheckBox);
-          listProductId = listProductId.filter((id) => productId !== id);
         }
       },
       []
@@ -87,17 +80,45 @@ if (listCheckBox.length > 0) {
 if (formChangeMultilpleStatus) {
   formChangeMultilpleStatus.addEventListener("submit", (event) => {
     event.preventDefault();
-    const typeSelected = event.target.elements[0].value;
+    const typeChange = event.target.elements[0].value;
 
-    if (listProductId.length === 0) {
-      alert("Please choose at least 1 product");
+    if (typeChange === "delete") {
+      const isConfirm = confirm("Are you sure to delele all");
+      if (!isConfirm) {
+        return;
+      }
+    }
+
+    let ids = [];
+
+    if (typeChange === "none") {
+      alert("Please choose these methods below");
     } else {
-      const isConfirm = confirm(
-        `Are you sure to ${typeSelected.toUpperCase()} all ?`
-      );
-      if (isConfirm) {
-        event.target.elements[1].setAttribute("value", listProductId.join(","));
+      if (typeChange === "change-position") {
+        listCheckBox.forEach((cb) => {
+          if (cb.checked) {
+            const productId = cb.getAttribute("data-id");
+            const positionProduct = cb
+              .closest("tr")
+              .querySelector("input[name='position']").value;
+
+            ids.push(`${productId}-${positionProduct}`);
+          }
+        });
+      } else {
+        listCheckBox.forEach((cb) => {
+          if (cb.checked) {
+            const productId = cb.getAttribute("data-id");
+            ids.push(productId);
+          }
+        });
+      }
+
+      if (ids.length !== 0) {
+        event.target.elements[1].value = ids.join(",");
         formChangeMultilpleStatus.submit();
+      } else {
+        alert("Please choose at least one product");
       }
     }
   });
@@ -114,6 +135,7 @@ if (deleteButtons.length > 0) {
   deleteButtons.forEach((btn) => {
     btn.addEventListener("click", (event) => {
       const isConfirm = confirm("Are you sure to delete");
+
       if (isConfirm) {
         const productId = btn.getAttribute("data-id");
         formDeleteProduct.action = `${path}/${productId}?_method=DELETE`;
