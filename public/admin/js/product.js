@@ -62,7 +62,6 @@ if (checkboxAllButton) {
         listProductId = listProductId.filter((id) => productId !== id);
       });
     }
-    console.log(listProductId);
   });
 }
 
@@ -88,11 +87,18 @@ if (listCheckBox.length > 0) {
 if (formChangeMultilpleStatus) {
   formChangeMultilpleStatus.addEventListener("submit", (event) => {
     event.preventDefault();
+    const typeSelected = event.target.elements[0].value;
+
     if (listProductId.length === 0) {
       alert("Please choose at least 1 product");
     } else {
-      event.target.elements[1].setAttribute("value", listProductId.join(","));
-      formChangeMultilpleStatus.submit();
+      const isConfirm = confirm(
+        `Are you sure to ${typeSelected.toUpperCase()} all ?`
+      );
+      if (isConfirm) {
+        event.target.elements[1].setAttribute("value", listProductId.join(","));
+        formChangeMultilpleStatus.submit();
+      }
     }
   });
 }

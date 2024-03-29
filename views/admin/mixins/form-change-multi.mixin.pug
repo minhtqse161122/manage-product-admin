@@ -7,8 +7,11 @@ mixin form-change-multi(url)
       .d-flex.align-items-center 
           .form-group 
               select(name='type' class="form-control" id="select-status")
+                  option(disabled selected) -- Choose action --
                   option(value="active") Active
                   option(value="inactive") Inactive
+                  option(value="delete") Delete
+
           .form-group 
               input(
                   id="list-id-product"

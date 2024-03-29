@@ -92,6 +92,7 @@ module.exports.changeMultiStatus = async (req, res) => {
           }
         );
         break;
+
       case "inactive":
         await Product.updateMany(
           {
@@ -101,8 +102,19 @@ module.exports.changeMultiStatus = async (req, res) => {
             status: "inactive",
           }
         );
-
         break;
+
+      case "delete":
+        await Product.updateMany(
+          {
+            _id: { $in: ids },
+          },
+          {
+            deleted: true,
+          }
+        );
+        break;
+
       default:
         break;
     }
