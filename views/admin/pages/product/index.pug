@@ -2,9 +2,18 @@ extends ../../layout/_default-layout.pug
 include ../../mixins/product-component.mixin.pug
 include ../../mixins/form-search.mixin.pug
 include ../../mixins/form-change-multi.mixin.pug
-block main 
-    h1=title
 
+block main 
+
+    - if (messages.success)
+        div(
+            class='alert alert-success'
+            show-alert
+            data-time=3000
+        ) #{messages.success} <span>x</span>
+          
+    h1=title
+    
     .card.mb-3 
         .card-header Filter and Search
         .card-body.d-flex.justify-content-between

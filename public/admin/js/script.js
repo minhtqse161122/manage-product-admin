@@ -116,3 +116,16 @@ if (sortByPosition) {
   });
 }
 // End handle sort by position
+
+// Handle show alert
+
+const showAlert = $("[show-alert]");
+
+if (showAlert) {
+  const timeout = parseInt(showAlert.getAttribute("data-time"));
+  setTimeout(() => {
+    showAlert.classList.add("alert-hidden");
+  }, timeout);
+}
+
+// End handle show alert
