@@ -120,12 +120,19 @@ if (sortByPosition) {
 // Handle show alert
 
 const showAlert = $("[show-alert]");
+const closeAlertButton = $("[close-alert]");
+
+if (closeAlertButton) {
+  closeAlertButton.addEventListener("click", (event) => {
+    showAlert.classList.add("alert-hidden");
+  });
+}
 
 if (showAlert) {
   const timeout = parseInt(showAlert.getAttribute("data-time"));
   setTimeout(() => {
     showAlert.classList.add("alert-hidden");
-  }, timeout);
+  }, 100000);
 }
 
 // End handle show alert
