@@ -9,7 +9,7 @@ const { pagination } = require("../../utils/pagination-helper");
 module.exports.index = async (req, res) => {
   try {
     let currentStatus;
-
+    let sortByPosition = req.query.sortByPosition || "desc";
     let queryString = {
       deleted: false,
     };
@@ -34,10 +34,11 @@ module.exports.index = async (req, res) => {
 
     // query data from Database
     const data = await Product.find(queryString)
+      .sort({ position: sortByPosition })
       .limit(objectPagination.limit)
       .skip(objectPagination.skip);
 
-    res.render("./admin/pages/product/index", {
+    res.render("admin/pages/product/index", {
       title: "List Products",
       products: data,
       currentStatus: currentStatus || "All",
@@ -45,6 +46,7 @@ module.exports.index = async (req, res) => {
       currentPage: objectPagination.currentPage,
       totalPage: objectPagination.totalPage,
       skipIndex: objectPagination.skip,
+      textSortBy: sortByPosition,
     });
   } catch (error) {
     res.render("./admin/pages/not-found/index");
@@ -121,7 +123,7 @@ module.exports.changeMultiStatus = async (req, res) => {
           const [productId, positionIndex] = item.split("-");
           await Product.updateOne(
             { _id: productId },
-            { position: positionIndex }
+            { position: parseInt(positionIndex) }
           );
         }
         break;

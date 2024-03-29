@@ -8,7 +8,7 @@ module.exports.index = async (req, res) => {
     const data = await Product.find({
       status: "active",
       deleted: false,
-    });
+    }).sort({ position: "desc" });
 
     // Add key [newPrice]
     const data_v2 = data.map((item) => {

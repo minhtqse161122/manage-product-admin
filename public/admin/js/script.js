@@ -101,3 +101,18 @@ if (paginateBtn) {
   });
 }
 // End handle next , prev pagination
+
+// Handle sort by position
+const sortByPosition = $("#sort-by-position");
+
+if (sortByPosition) {
+  sortByPosition.addEventListener("change", (event) => {
+    const sortValue = event.target.value;
+    if (sortValue) {
+      let url = new URL(window.location.href);
+      url.searchParams.set("sortByPosition", sortValue);
+      window.location.href = url.href;
+    }
+  });
+}
+// End handle sort by position

@@ -12,7 +12,7 @@ module.exports.index = async (req, res) => {
 
     const data = await Product.find(queryString);
 
-    res.render("./admin/pages/product-trash/index", {
+    res.render("admin/pages/product-trash/index", {
       title: "Garbage",
       products: data,
     });
@@ -40,6 +40,10 @@ module.exports.recoveryProduct = async (req, res) => {
   }
 };
 
+/**
+ * Khôi phục nhiều sản phẩm sản phẩm
+ * @method PATCH
+ */
 module.exports.recoveryAllProduct = async (req, res) => {
   try {
     const ids = req.body.list_ids.split(",");
