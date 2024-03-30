@@ -70,7 +70,6 @@ const changeStatus = async (req, res) => {
 
     req.flash("success", "Product status have been changed.");
     res.redirect("back");
-    console.log(req.session);
   } catch (error) {
     console.log(error);
   }
@@ -188,8 +187,8 @@ const createProduct = async (req, res) => {
       price,
       discountPercentage,
       stock,
-      thumbnail,
       position,
+      thumbnail,
       status,
     } = req.body;
 
@@ -199,7 +198,7 @@ const createProduct = async (req, res) => {
       price: parseInt(price),
       discountPercentage: parseInt(discountPercentage),
       stock: parseInt(stock),
-      thumbnail,
+      thumbnail: `/uploads/${req.file.filename}`,
       position:
         position === ""
           ? (await Product.countDocuments()) + 1

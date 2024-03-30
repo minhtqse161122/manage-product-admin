@@ -147,5 +147,3 @@ if (deleteButtons.length > 0) {
   });
 }
 // End handle delete item
-
-console.log("123");
