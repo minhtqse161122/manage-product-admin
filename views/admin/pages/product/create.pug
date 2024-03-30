@@ -6,6 +6,7 @@ block main
   form(
     action=`${prefixAdmin}/products/create`
     method="POST"
+    enctype="multipart/form-data"
     id="form-create-product"
   )
     div(class="form-group mb-2")
@@ -62,10 +63,11 @@ block main
     div(class="form-group mb-2")
       label(for="thumbnail") Image
       input(
-        type="text"
-        class="form-control"
+        type="file"
+        class="form-control-file"
         id="thumbnail"
         name="thumbnail"
+        accept="image/*"
       )
     div(class="form-group mb-2")
       label(for="position") Position
