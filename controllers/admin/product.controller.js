@@ -5,8 +5,9 @@ const { pagination } = require("../../utils/pagination-helper");
 /**
  * Lấy ra list sản phẩm và filter
  * @method GET - /admin/products
+ * @return page index
  */
-module.exports.index = async (req, res) => {
+const index = async (req, res) => {
   try {
     let currentStatus;
     let sortByPosition = req.query.sortByPosition || "desc";
@@ -57,7 +58,7 @@ module.exports.index = async (req, res) => {
  * Thay đổi trạng thái của sản phẩm
  * @method PATCH - /admin/products/change-status/:status/:productId
  */
-module.exports.changeStatus = async (req, res) => {
+const changeStatus = async (req, res) => {
   try {
     const status = req.params.status;
     const productId = req.params.productId;
@@ -69,6 +70,7 @@ module.exports.changeStatus = async (req, res) => {
 
     req.flash("success", "Product status have been changed.");
     res.redirect("back");
+    console.log(req.session);
   } catch (error) {
     console.log(error);
   }
@@ -78,7 +80,7 @@ module.exports.changeStatus = async (req, res) => {
  * Thay đổi trạng thái của nhiều sản phẩm
  * @method PATCH - /admin/products/change-multiple-status
  */
-module.exports.changeMultiStatus = async (req, res) => {
+const changeMultiStatus = async (req, res) => {
   try {
     const ids = req.body.ids.split(",");
     const type = req.body.type;
@@ -93,6 +95,7 @@ module.exports.changeMultiStatus = async (req, res) => {
             status: "active",
           }
         );
+        req.flash("success", `${ids.length} products have been actived.`);
         break;
 
       case "inactive":
@@ -104,6 +107,7 @@ module.exports.changeMultiStatus = async (req, res) => {
             status: "inactive",
           }
         );
+        req.flash("success", `${ids.length} products have been inactived.`);
         break;
 
       case "delete":
@@ -116,6 +120,7 @@ module.exports.changeMultiStatus = async (req, res) => {
             deletedAt: new Date(),
           }
         );
+        req.flash("success", `${ids.length} products have been deleted.`);
         break;
 
       case "change-position":
@@ -126,12 +131,15 @@ module.exports.changeMultiStatus = async (req, res) => {
             { position: parseInt(positionIndex) }
           );
         }
+        req.flash(
+          "success",
+          `${ids.length} products position have been saved.`
+        );
         break;
       default:
         m;
         break;
     }
-    req.flash("success", "Product position have been saved.");
     res.redirect("back");
   } catch (error) {}
 };
@@ -140,7 +148,7 @@ module.exports.changeMultiStatus = async (req, res) => {
  * Xoá mềm - Thay đổi deleted = true
  * @method DELETE - /admin/products/delete-product/:productId
  */
-module.exports.deleteProduct = async (req, res) => {
+const deleteProduct = async (req, res) => {
   try {
     const productId = req.params.productId;
     await Product.updateOne(
@@ -153,4 +161,65 @@ module.exports.deleteProduct = async (req, res) => {
     req.flash("success", "Product have been deleted.");
     res.redirect("back");
   } catch (error) {}
+};
+
+/**
+ * Trả về giao diện trang create product
+ * @method GET
+ * @return page create product
+ */
+
+const create = async (req, res) => {
+  try {
+    res.render("admin/pages/product/create", { title: "Create new product" });
+  } catch (error) {}
+};
+
+/**
+ * Tạo mới một sản phẩm
+ * @method POST
+ * @return page create product
+ */
+const createProduct = async (req, res) => {
+  try {
+    const {
+      title,
+      description,
+      price,
+      discountPercentage,
+      stock,
+      thumbnail,
+      position,
+      status,
+    } = req.body;
+
+    const objectProduct = {
+      title,
+      description,
+      price: parseInt(price),
+      discountPercentage: parseInt(discountPercentage),
+      stock: parseInt(stock),
+      thumbnail,
+      position:
+        position === ""
+          ? (await Product.countDocuments()) + 1
+          : parseInt(position),
+      status,
+      deleted: false,
+    };
+
+    const product = new Product(objectProduct);
+    await product.save();
+
+    res.redirect("/admin/products");
+  } catch (error) {}
+};
+
+module.exports = {
+  create,
+  index,
+  deleteProduct,
+  changeMultiStatus,
+  changeStatus,
+  createProduct,
 };

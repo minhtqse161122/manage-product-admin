@@ -127,9 +127,9 @@ if (showAlert) {
   closeAlertButton.addEventListener("click", (event) => {
     showAlert.classList.add("alert-hidden");
   });
-  setTimeout(() => {
-    showAlert.classList.add("alert-hidden");
-  }, timeout);
+  // setTimeout(() => {
+  //   showAlert.classList.add("alert-hidden");
+  // }, timeout);
 }
 
 // End handle show alert
