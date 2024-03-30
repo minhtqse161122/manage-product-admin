@@ -194,7 +194,7 @@ const createProduct = async (req, res) => {
     } = req.body;
 
     const objectProduct = {
-      title,
+      title: title.trim(),
       description,
       price: parseInt(price),
       discountPercentage: parseInt(discountPercentage),
