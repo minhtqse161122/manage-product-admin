@@ -1,7 +1,7 @@
 const Product = require("../../models/product.model");
 const { objectTextSearch, capitalize } = require("../../utils/search-helper");
 const { pagination } = require("../../utils/pagination-helper");
-
+const systemConfig = require("../../config/system");
 /**
  * Lấy ra list sản phẩm và filter
  * @method GET - /admin/products
@@ -211,7 +211,7 @@ const createProduct = async (req, res) => {
     const product = new Product(objectProduct);
     await product.save();
 
-    res.redirect("/admin/products");
+    res.redirect(`${systemConfig.prefixAdmin}/products`);
   } catch (error) {}
 };
 
