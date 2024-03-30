@@ -13,7 +13,7 @@ const productSchema = new mongoose.Schema(
     thumbnail: String,
     status: String,
     position: Number,
-    slug: { type: String, slug: "title" },
+    slug: { type: String, slug: ["title"], unique: true },
     deleted: {
       type: Boolean,
       default: false,
