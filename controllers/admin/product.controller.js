@@ -209,7 +209,6 @@ const createProduct = async (req, res) => {
     };
 
     const product = new Product(objectProduct);
-
     await product.save();
 
     res.redirect(`${systemConfig.prefixAdmin}/products`);
