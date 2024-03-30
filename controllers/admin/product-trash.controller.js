@@ -12,7 +12,7 @@ module.exports.index = async (req, res) => {
 
     const data = await Product.find(queryString);
 
-    res.render("admin/pages/product-trash/index", {
+    res.render("admin/pages/product/product-trash", {
       title: "Garbage",
       products: data,
     });

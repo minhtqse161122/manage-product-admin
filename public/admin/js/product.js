@@ -78,6 +78,7 @@ if (listCheckBox.length > 0) {
 }
 
 if (formChangeMultilpleStatus) {
+  const selectStatus = $("#select-status");
   formChangeMultilpleStatus.addEventListener("submit", (event) => {
     event.preventDefault();
     const typeChange = event.target.elements[0].value;
@@ -93,6 +94,7 @@ if (formChangeMultilpleStatus) {
 
     if (typeChange === "none") {
       alert("Please choose these methods below");
+      selectStatus.focus();
     } else {
       if (typeChange === "change-position") {
         listCheckBox.forEach((cb) => {
@@ -145,3 +147,5 @@ if (deleteButtons.length > 0) {
   });
 }
 // End handle delete item
+
+console.log("123");
