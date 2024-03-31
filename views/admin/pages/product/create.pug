@@ -60,7 +60,7 @@ block main
         min="0"
         required
       )
-    div(class="form-group mb-2")
+    div(class="form-group mb-2" upload-image)
       label(for="thumbnail") Image
       input(
         type="file"
@@ -68,7 +68,10 @@ block main
         id="thumbnail"
         name="thumbnail"
         accept="image/*"
+        upload-image-input
       )
+    image(id="img-preview" width="200" height="200" upload-image-preview)
+
     div(class="form-group mb-2")
       label(for="position") Position
       input(

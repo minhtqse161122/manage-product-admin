@@ -133,3 +133,20 @@ if (showAlert) {
 }
 
 // End handle show alert
+
+//Preview image
+const wrapPreviewImage = $("[upload-image]");
+
+if (wrapPreviewImage) {
+  const uploadImageInput = $("[upload-image-input]");
+  const uploadImagePreview = $("[upload-image-preview]");
+
+  uploadImageInput.addEventListener("change", (event) => {
+    console.log(event.target.files);
+    if (event.target.files.length) {
+      const imagePreview = URL.createObjectURL(event.target.files[0]);
+      uploadImagePreview.src = imagePreview;
+    }
+  });
+}
+//End preview image
