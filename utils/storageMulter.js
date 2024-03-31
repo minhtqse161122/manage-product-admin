@@ -1,5 +1,9 @@
 const multer = require("multer");
-
+/**
+ * Cấu hình lại đường dẫn save file
+ * Cấu hình file name
+ * @returns
+ */
 module.exports = () => {
   const storage = multer.diskStorage({
     destination: function (req, file, cb) {

@@ -188,7 +188,6 @@ const createProduct = async (req, res) => {
       discountPercentage,
       stock,
       position,
-      thumbnail,
       status,
     } = req.body;
 
