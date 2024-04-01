@@ -85,3 +85,21 @@
   background-color: rgb(211, 228, 211);
 }
 /* End alert hidden */
+
+/* Pointer */
+
+.cursor-pointer {
+  cursor: pointer;
+}
+/*  END Pointer */
+
+/* Image preview */
+#img-preview {
+  width: 300px;
+  height: auto;
+  margin-top: 15px;
+  border: 1px solid #ddd;
+  padding: 15px;
+  border-radius: 5px;
+}
+/* End Image preview */

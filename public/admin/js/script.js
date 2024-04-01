@@ -135,32 +135,40 @@ if (showAlert) {
 // End handle show alert
 
 //Preview image
-const wrapPreviewImage = $("[upload-image]");
 
-if (wrapPreviewImage) {
-  const minimizePreviewImageButton = $("[button-minimize-preview]");
-  const showPreviewImageButton = $("[button-show-preview]");
-  const uploadImageInput = $("[upload-image-input]");
+const wrapImagePreviewContent = $("[wrap-upload-image]");
+
+if (wrapImagePreviewContent) {
   const uploadImagePreview = $("[upload-image-preview]");
-  const wrapPreviewImage = $("[wrapPreviewImage]");
+  const imagePreview = $("[image-preview]");
+  const buttonShowPreviewImage = $("[show-image-preview]");
+  const wrapImagePreview = $("[wrap-image-preview]");
+  const minimizeButton = $("[minimize-image-preview]");
 
-  uploadImageInput.addEventListener("change", (event) => {
+  uploadImagePreview.addEventListener("change", (event) => {
     if (event.target.files.length > 0) {
-      const imagePreview = URL.createObjectURL(event.target.files[0]);
-      uploadImagePreview.src = imagePreview;
-      showPreviewImageButton.classList.remove("d-none");
+      const [imageFile] = event.target.files;
+
+      const tempUrlPreviewImage = URL.createObjectURL(imageFile);
+      imagePreview.src = tempUrlPreviewImage;
+      buttonShowPreviewImage.classList.remove("d-none");
+    } else {
+      imagePreview.src = "!#";
+      wrapImagePreview.classList.add("d-none");
     }
   });
 
-  showPreviewImageButton.addEventListener("click", (event) => {
-    wrapPreviewImage.classList.remove("d-none");
-  });
+  if (buttonShowPreviewImage) {
+    buttonShowPreviewImage.addEventListener("click", () => {
+      wrapImagePreview.classList.remove("d-none");
+    });
+  }
 
-  minimizePreviewImageButton.addEventListener("click", (event) => {
-    wrapPreviewImage.classList.add("d-none");
-  });
+  if (minimizeButton) {
+    minimizeButton.addEventListener("click", () => {
+      wrapImagePreview.classList.add("d-none");
+    });
+  }
 }
-//End preview image
 
-// Minimize preview image
-// End minimize preview image
+//End preview image
