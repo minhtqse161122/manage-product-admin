@@ -127,9 +127,9 @@ if (showAlert) {
   closeAlertButton.addEventListener("click", (event) => {
     showAlert.classList.add("alert-hidden");
   });
-  // setTimeout(() => {
-  //   showAlert.classList.add("alert-hidden");
-  // }, timeout);
+  setTimeout(() => {
+    showAlert.classList.add("alert-hidden");
+  }, timeout);
 }
 
 // End handle show alert
@@ -138,15 +138,29 @@ if (showAlert) {
 const wrapPreviewImage = $("[upload-image]");
 
 if (wrapPreviewImage) {
+  const minimizePreviewImageButton = $("[button-minimize-preview]");
+  const showPreviewImageButton = $("[button-show-preview]");
   const uploadImageInput = $("[upload-image-input]");
   const uploadImagePreview = $("[upload-image-preview]");
+  const wrapPreviewImage = $("[wrapPreviewImage]");
 
   uploadImageInput.addEventListener("change", (event) => {
-    console.log(event.target.files);
-    if (event.target.files.length) {
+    if (event.target.files.length > 0) {
       const imagePreview = URL.createObjectURL(event.target.files[0]);
       uploadImagePreview.src = imagePreview;
+      showPreviewImageButton.classList.remove("d-none");
     }
+  });
+
+  showPreviewImageButton.addEventListener("click", (event) => {
+    wrapPreviewImage.classList.remove("d-none");
+  });
+
+  minimizePreviewImageButton.addEventListener("click", (event) => {
+    wrapPreviewImage.classList.add("d-none");
   });
 }
 //End preview image
+
+// Minimize preview image
+// End minimize preview image
