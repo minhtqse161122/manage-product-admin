@@ -1,8 +1,10 @@
 extends ../../layout/_default-layout.pug
+include ../../mixins/notification-component.mixin.pug
 
 block main  
   h1(class="mb-4")=title
-
+  +alert-error(messages.error)
+  
   form(
     action=`${prefixAdmin}/products/create`
     method="POST"
@@ -16,7 +18,7 @@ block main
         class="form-control"
         id="title"
         name="title"
-        required
+        
       )
     div(class="form-group mb-2")
       label(for="desc") Description 
@@ -25,7 +27,7 @@ block main
         id="desc"
         name="description"
         rows="5"
-        required
+        
       ) 
     div(class="form-group mb-2")
       label(for="price") Price 
@@ -36,8 +38,9 @@ block main
         name="price"
         value="0"
         min="0"
-        required
+        
       )
+
     div(class="form-group mb-2")
       label(for="discount") % Discount
       input(
@@ -47,8 +50,9 @@ block main
         name="discountPercentage"
         value="0"
         min="0"
-        required
+        
       )
+
     div(class="form-group mb-2")
       label(for="stock") Stock
       input(
@@ -58,9 +62,10 @@ block main
         name="stock"
         value="0"
         min="0"
-        required
+        
       )
-    div(class="form-group mb-2" upload-image)
+
+    div(class="form-group mb-2" wrap-upload-image)
       label(for="thumbnail") Image
       input(
         type="file"
@@ -68,21 +73,20 @@ block main
         id="thumbnail"
         name="thumbnail"
         accept="image/*"
-        upload-image-input
+        upload-image-preview
       )
-    button(
-      type="button"
-      class="d-none btn btn-secondary"
-      button-show-preview
-    ) Preview Image
 
-    div(class="d-none position-relative" style="width: 300px; height: 300px;" wrapPreviewImage)
-      image(id="img-preview" width="100%" height="100%" upload-image-preview)
-      div(class="position-absolute top-0 start-100 translate-middle" button-minimize-preview) 
-        svg.bi.bi-dash-circle-fill(xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='#eab308' viewbox='0 0 16 16')
-          path(d='M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1z')
+      button(
+        type="button"
+        class="d-none btn btn-outline-secondary"
+        show-image-preview
+      ) Preview Image
 
-
+      div(class="d-none position-relative" style="width: 300px; height: 300px;" wrap-image-preview)
+        image(id="img-preview" image-preview)
+        div(class="position-absolute top-0 start-100 translate-middle cursor-pointer" minimize-image-preview) 
+          svg.bi.bi-dash-circle-fill(xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='#eab308' viewbox='0 0 16 16')
+            path(d='M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M4.5 7.5a.5.5 0 0 0 0 1h7a.5.5 0 0 0 0-1z')
 
 
     div(class="form-group mb-2")

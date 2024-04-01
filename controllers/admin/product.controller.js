@@ -197,7 +197,7 @@ const createProduct = async (req, res) => {
       price: parseInt(price),
       discountPercentage: parseInt(discountPercentage),
       stock: parseInt(stock),
-      thumbnail: `/uploads/${req.file.filename}`,
+      thumbnail: req.file ? `/uploads/${req.file.filename}` : "",
       position:
         position === ""
           ? (await Product.countDocuments()) + 1
