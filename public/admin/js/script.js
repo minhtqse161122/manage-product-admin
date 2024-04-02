@@ -144,11 +144,10 @@ if (uploadPreviewImageComponent) {
   const clearImagePreviewButton = $("[button-clear-image-preview]");
 
   uploadPreviewImage.addEventListener("change", (event) => {
-    console.log(event);
     if (event.target.files.length > 0) {
       const [imageFile] = event.target.files;
 
-      //create an temp url for image from object File
+      //create an temp url for image input can take value and show on client
       const tempUrlImage = URL.createObjectURL(imageFile);
       previewImage.src = tempUrlImage;
       wrappPreviewImage.classList.remove("d-none");

@@ -41,7 +41,7 @@ mixin product-component(data, index)
                 data-id=data.id
                 class="text-danger") Inactive                                
     td
-        a(class="btn btn-warning btn-sm") Edit                      
+        a(class="btn btn-warning btn-sm" href=`${prefixAdmin}/products/edit/${data.id}`) Edit                      
         button(
             delete-button
             class="btn btn-danger btn-sm"
