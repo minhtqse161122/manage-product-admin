@@ -4,12 +4,13 @@ include ../../mixins/notification-component.mixin.pug
 block main  
   h1(class="mb-4")=title
   +alert-error(messages.error)
+  +alert-success(messages.success)
   
   form(
-    action=`${prefixAdmin}/products/create`
+    action=`${prefixAdmin}/products/edit/${productData.id}?_method=PATCH`
     method="POST"
+    id="form-edit-product"
     enctype="multipart/form-data"
-    id="form-create-product"
   )
     div(class="form-group mb-2")
       label(for="title") Title 
@@ -28,8 +29,8 @@ block main
         id="desc"
         name="description"
         rows="5"
-      ) 
-      #{productData.title}
+      ) #{productData.description}
+      
     div(class="form-group mb-2")
       label(for="price") Price 
       input(
@@ -116,7 +117,7 @@ block main
       label(for="statusInactive" class="form-check-label") Inactive 
 
     div(class="form-group")
-      button(type="submit" class="btn btn-primary") Create new
+      button(type="submit" class="btn btn-primary") Update
 
 
 

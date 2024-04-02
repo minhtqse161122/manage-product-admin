@@ -36,6 +36,14 @@ router.patch(
 // [PATCH] - Update status for multiple products
 router.patch("/change-multiple-status", productController.changeMultiStatus);
 
+// [PATCH] - Update product
+router.patch(
+  "/edit/:productId",
+  upload.single("thumbnail"),
+  systemValidate.createValidate,
+  productController.editProduct
+);
+
 // [DELETE] - Update delete field
 router.delete("/delete-product/:productId", productController.deleteProduct);
 
