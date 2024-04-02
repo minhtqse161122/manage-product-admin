@@ -135,40 +135,30 @@ if (showAlert) {
 // End handle show alert
 
 //Preview image
+const uploadPreviewImageComponent = $("[upload-preview-image-component]");
 
-const wrapImagePreviewContent = $("[wrap-upload-image]");
+if (uploadPreviewImageComponent) {
+  const uploadPreviewImage = $("[upload-preview-image]");
+  const previewImage = $("[preview-image]");
+  const wrappPreviewImage = $("[wrap-preview-image]");
+  const clearImagePreviewButton = $("[button-clear-image-preview]");
 
-if (wrapImagePreviewContent) {
-  const uploadImagePreview = $("[upload-image-preview]");
-  const imagePreview = $("[image-preview]");
-  const buttonShowPreviewImage = $("[show-image-preview]");
-  const wrapImagePreview = $("[wrap-image-preview]");
-  const minimizeButton = $("[minimize-image-preview]");
-
-  uploadImagePreview.addEventListener("change", (event) => {
+  uploadPreviewImage.addEventListener("change", (event) => {
+    console.log(event);
     if (event.target.files.length > 0) {
       const [imageFile] = event.target.files;
 
-      const tempUrlPreviewImage = URL.createObjectURL(imageFile);
-      imagePreview.src = tempUrlPreviewImage;
-      buttonShowPreviewImage.classList.remove("d-none");
-    } else {
-      imagePreview.src = "!#";
-      wrapImagePreview.classList.add("d-none");
+      //create an temp url for image from object File
+      const tempUrlImage = URL.createObjectURL(imageFile);
+      previewImage.src = tempUrlImage;
+      wrappPreviewImage.classList.remove("d-none");
     }
   });
 
-  if (buttonShowPreviewImage) {
-    buttonShowPreviewImage.addEventListener("click", () => {
-      wrapImagePreview.classList.remove("d-none");
-    });
-  }
-
-  if (minimizeButton) {
-    minimizeButton.addEventListener("click", () => {
-      wrapImagePreview.classList.add("d-none");
-    });
-  }
+  clearImagePreviewButton.addEventListener("click", (event) => {
+    uploadPreviewImage.value = "";
+    previewImage.src = "#";
+    wrappPreviewImage.classList.add("d-none");
+  });
 }
-
 //End preview image

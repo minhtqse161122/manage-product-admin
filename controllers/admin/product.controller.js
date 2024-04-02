@@ -190,6 +190,7 @@ const createProduct = async (req, res) => {
       position,
       status,
     } = req.body;
+    console.log(req.body);
 
     const objectProduct = {
       title: title.trim(),
