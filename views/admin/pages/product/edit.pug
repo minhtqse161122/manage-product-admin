@@ -18,6 +18,8 @@ block main
         class="form-control"
         id="title"
         name="title"
+        value=productData.title
+        
       )
     div(class="form-group mb-2")
       label(for="desc") Description 
@@ -27,6 +29,7 @@ block main
         name="description"
         rows="5"
       ) 
+      #{productData.title}
     div(class="form-group mb-2")
       label(for="price") Price 
       input(
@@ -34,7 +37,7 @@ block main
         class="form-control"
         id="price"
         name="price"
-        value="0"
+        value=productData.price
         min="0"
         
       )
@@ -46,7 +49,7 @@ block main
         class="form-control"
         id="discount"
         name="discountPercentage"
-        value="0"
+        value=productData.discountPercentage
         min="0"
         
       )
@@ -58,7 +61,7 @@ block main
         class="form-control"
         id="stock"
         name="stock"
-        value="0"
+        value=productData.stock
         min="0"
         
       )
@@ -71,11 +74,12 @@ block main
         id="thumbnail"
         name="thumbnail"
         accept="image/*"
+        value=productData.thumbnail
         upload-preview-image
       ) 
       
-      div(class="d-none position-relative" id="img-preview" wrap-preview-image)
-        image(src="" class="" width="100%" height="100%"  preview-image)
+      div(class="position-relative" id="img-preview" wrap-preview-image)
+        image(src=productData.thumbnail class="" width="100%" height="100%"  preview-image)
         div(class="position-absolute top-0 start-100 translate-middle cursor-pointer" button-clear-image-preview)
           svg.bi.bi-x-circle-fill(xmlns='http://www.w3.org/2000/svg' width='16' height='16' fill='#0b5ed7' viewbox='0 0 16 16')
             path(d='M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0M5.354 4.646a.5.5 0 1 0-.708.708L7.293 8l-2.647 2.646a.5.5 0 0 0 .708.708L8 8.707l2.646 2.647a.5.5 0 0 0 .708-.708L8.707 8l2.647-2.646a.5.5 0 0 0-.708-.708L8 7.293z')
@@ -88,6 +92,7 @@ block main
         class="form-control"
         id="position"
         name="position"
+        value=productData.position
         placeholder="Auto increase"
         min="1"
       )
@@ -97,7 +102,7 @@ block main
         id="statusActive"
         name="status"
         value="active"
-        checked  
+        checked=productData.status === 'active'
       )
       label(for="statusActive" class="form-check-label") Active 
     div(class="form-group mb-2 form-check form-check-inline")
@@ -106,7 +111,7 @@ block main
         id="statusInactive"
         name="status"
         value="inactive"
-        checked  
+        checked=productData.status === 'inactive' 
       )
       label(for="statusInactive" class="form-check-label") Inactive 
 

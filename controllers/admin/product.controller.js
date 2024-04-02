@@ -214,6 +214,28 @@ const createProduct = async (req, res) => {
   } catch (error) {}
 };
 
+/**
+ * Trả về trang sửa sản phẩm
+ * @method GET
+ * @return page edit product
+ */
+const edit = async (req, res) => {
+  try {
+    const productId = req.params.productId;
+    let find = {
+      deleted: false,
+      _id: productId,
+    };
+
+    const productData = await Product.findOne(find);
+
+    res.render(`admin/pages/product/edit`, {
+      title: "Edit product",
+      productData: productData,
+    });
+  } catch (error) {}
+};
+
 module.exports = {
   create,
   index,
@@ -221,4 +243,5 @@ module.exports = {
   changeMultiStatus,
   changeStatus,
   createProduct,
+  edit,
 };
