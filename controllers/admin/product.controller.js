@@ -181,37 +181,28 @@ const create = async (req, res) => {
  */
 const createProduct = async (req, res) => {
   try {
-    const {
-      title,
-      description,
-      price,
-      discountPercentage,
-      stock,
-      position,
-      status,
-    } = req.body;
-    console.log(req.body);
+    req.body.price = parseInt(req.body.price);
+    req.body.discountPercentage = parseInt(req.body.discountPercentage);
+    req.body.stock = parseInt(req.body.stock);
 
-    const objectProduct = {
-      title: title.trim(),
-      description,
-      price: parseInt(price),
-      discountPercentage: parseInt(discountPercentage),
-      stock: parseInt(stock),
-      thumbnail: req.file ? `/uploads/${req.file.filename}` : "",
-      position:
-        position === ""
-          ? (await Product.countDocuments()) + 1
-          : parseInt(position),
-      status,
-      deleted: false,
-    };
+    if (req.file) {
+      req.body.thumbnail = `/uploads/${req.file.filename}`;
+    }
 
-    const product = new Product(objectProduct);
+    if (req.body.position) {
+      req.body.position = parseInt(req.body.position);
+    } else {
+      req.body.position = await Product.countDocuments({ deleted: false });
+    }
+
+    const product = new Product(req.body);
     await product.save();
-
+    req.flash("success", "Create new product success");
+  } catch (error) {
+    req.flash("error", "Create new product error");
+  } finally {
     res.redirect(`${systemConfig.prefixAdmin}/products`);
-  } catch (error) {}
+  }
 };
 
 /**
@@ -236,6 +227,31 @@ const edit = async (req, res) => {
   } catch (error) {}
 };
 
+/**
+ * Update sản phẩm
+ * @param {*} req
+ * @param {*} res
+ */
+const editProduct = async (req, res) => {
+  req.body.price = parseInt(req.body.price);
+  req.body.discountPercentage = parseInt(req.body.discountPercentage);
+  req.body.stock = parseInt(req.body.stock);
+  req.body.position = parseInt(req.body.position);
+
+  if (req.file) {
+    req.body.thumbnail = `/uploads/${req.file.filename}`;
+  }
+
+  try {
+    await Product.updateOne({ _id: req.params.productId }, req.body);
+    req.flash("success", "Update was successful");
+  } catch (error) {
+    req.flash("error", "Update was error");
+  } finally {
+    res.redirect("back");
+  }
+};
+
 module.exports = {
   create,
   index,
@@ -244,4 +260,5 @@ module.exports = {
   changeStatus,
   createProduct,
   edit,
+  editProduct,
 };
